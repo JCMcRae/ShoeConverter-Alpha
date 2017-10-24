@@ -59,18 +59,18 @@ public class ShoeConverter {
 	final JRadioButton eu = new JRadioButton("EU");
 	final JButton help = new JButton("HELP");
 	final JButton convert = new JButton("CONVERT");
-	
+
 	public String getSelectedButtonText(ButtonGroup buttonGroup) {
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
+		for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
 
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
+			if (button.isSelected()) {
+				return button.getText();
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
 	/**
 	 * Launch the application.
@@ -108,14 +108,14 @@ public class ShoeConverter {
 		label.setFont(new Font("Helvetica LT Std Cond Blk", Font.BOLD | Font.ITALIC, 25));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		frmCysShoeConverter.getContentPane().add(label, BorderLayout.NORTH);
-		
+
 		window.setLayout(new GridLayout(1, 3, 1, 0));
 		window.add(leftPanel);
 		window.add(centerPanel);
 		window.add(rightPanel);
-		
+
 		leftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "INPUT"));
-		leftPanel.setLayout(new GridLayout(3,1));
+		leftPanel.setLayout(new GridLayout(3, 1));
 		userSize.setToolTipText("");
 		userSize.setHorizontalAlignment(SwingConstants.CENTER);
 		userSize.setFont(new Font("Helvetica LT Std Cond", Font.BOLD, 40));
@@ -128,34 +128,34 @@ public class ShoeConverter {
 		leftPanel.add(help);
 
 		genderPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "GENDER"));
-		genderPanel.setLayout(new GridLayout(2,1));
+		genderPanel.setLayout(new GridLayout(2, 1));
 		mens.setFont(new Font("Helvetica LT Std Cond Blk", Font.PLAIN, 20));
 		genderPanel.add(mens);
 		womens.setFont(new Font("Helvetica LT Std Cond Blk", Font.PLAIN, 20));
 		genderPanel.add(womens);
-		
+
 		regionPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "REGION"));
-		regionPanel.setLayout(new GridLayout(3,1));
+		regionPanel.setLayout(new GridLayout(3, 1));
 		us.setFont(new Font("Helvetica LT Std Cond Blk", Font.PLAIN, 20));
 		regionPanel.add(us);
 		uk.setFont(new Font("Helvetica LT Std Cond Blk", Font.PLAIN, 20));
 		regionPanel.add(uk);
 		eu.setFont(new Font("Helvetica LT Std Cond Blk", Font.PLAIN, 20));
 		regionPanel.add(eu);
-		
+
 		gender.add(mens);
 		gender.add(womens);
-		
+
 		region.add(us);
 		region.add(uk);
 		region.add(eu);
-		
+
 		centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "SYSTEM"));
-		centerPanel.setLayout(new GridLayout(2,1));
+		centerPanel.setLayout(new GridLayout(2, 1));
 		centerPanel.add(genderPanel);
 		centerPanel.add(regionPanel);
-		
-		sizePanel.setLayout(new GridLayout(3,2));
+
+		sizePanel.setLayout(new GridLayout(3, 2));
 		usLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		usLabel.setFont(new Font("Helvetica LT Std Cond Blk", Font.PLAIN, 20));
 		sizePanel.add(usLabel);
@@ -174,82 +174,76 @@ public class ShoeConverter {
 		euSize.setHorizontalAlignment(SwingConstants.LEFT);
 		euSize.setFont(new Font("Helvetica LT Std Cond", Font.PLAIN, 20));
 		sizePanel.add(euSize);
-		
+
 		rightPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "SIZES"));
-		rightPanel.setLayout(new GridLayout(2,1));
+		rightPanel.setLayout(new GridLayout(2, 1));
 		rightPanel.add(sizePanel);
-		
+
 		convert.setBackground(UIManager.getColor("Button.light"));
 		convert.setFont(new Font("Helvetica LT Std Cond Blk", Font.BOLD | Font.ITALIC, 20));
 		rightPanel.add(convert);
-		
+
 		label.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e){
-				JOptionPane.showMessageDialog(label, info);
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, info);
 			}
 		});
-		
+
 		convert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String size = userSize.getText();
-				double dbl = Double.parseDouble(size);
-				if((size == null || size.equals("")) && (getSelectedButtonText(gender) == null && getSelectedButtonText(region) == null)){
-					 JOptionPane.showMessageDialog(null, "Nothing was entered.\nEnter your size, select your gender, and select a sizing system.");
-				}else if((size == null || size.equals("")) && (getSelectedButtonText(gender) != null && getSelectedButtonText(region) == null)){
-					JOptionPane.showMessageDialog(null, "Enter your size and select your sizing system.");
-				}else if((size == null || size.equals("")) && (getSelectedButtonText(gender) == null && getSelectedButtonText(region) != null)){
-					JOptionPane.showMessageDialog(null, "Enter your size and select your gender.");
-				}else if((size != null) && (getSelectedButtonText(gender) == null && getSelectedButtonText(region) == null)){
-					JOptionPane.showMessageDialog(null, "Select gender and sizing system.");
-				}else if((size != null) && (getSelectedButtonText(gender) == null && getSelectedButtonText(region) != null)){
-					JOptionPane.showMessageDialog(null, "Select gender.");
-				}else if((size != null) && (getSelectedButtonText(gender) != null && getSelectedButtonText(region) == null)){
-					JOptionPane.showMessageDialog(null, "Select sizing system.");
-				}else if((size == null || size.equals("")) && (getSelectedButtonText(gender) != null && getSelectedButtonText(region) != null)){
-					JOptionPane.showMessageDialog(null, "Enter your shoe size.");
-				}else{
-					if(getSelectedButtonText(gender).equals(mens.getText())){
-						if(getSelectedButtonText(region).equals(us.getText())){
-							usSize.setText(size);
-							ukSize.setText(ShoeSizeConverter.mensUSToUK(dbl));
-							euSize.setText(ShoeSizeConverter.mensUSToEu(dbl));
-						}else if(getSelectedButtonText(region).equals(uk.getText())){
-							usSize.setText(ShoeSizeConverter.mensUKToUS(dbl));
-							ukSize.setText(size);
-							euSize.setText(ShoeSizeConverter.mensUKtoEu(dbl));
-						}else if(getSelectedButtonText(region).equals(eu.getText())){
-							usSize.setText(ShoeSizeConverter.mensEuToUS(dbl));
-							ukSize.setText(ShoeSizeConverter.mensEuToUK(dbl));
-							euSize.setText(size);
+				try {
+					double dbl = Double.parseDouble(size);
+					if (!size.isEmpty() && getSelectedButtonText(gender) != null
+							&& getSelectedButtonText(region) != null) {
+						if (getSelectedButtonText(gender).equals(mens.getText())) {
+							if (getSelectedButtonText(region).equals(us.getText())) {
+								usSize.setText(size);
+								ukSize.setText(ShoeSizeConverter.mensUSToUK(dbl));
+								euSize.setText(ShoeSizeConverter.mensUSToEu(dbl));
+							} else if (getSelectedButtonText(region).equals(uk.getText())) {
+								usSize.setText(ShoeSizeConverter.mensUKToUS(dbl));
+								ukSize.setText(size);
+								euSize.setText(ShoeSizeConverter.mensUKtoEu(dbl));
+							} else if (getSelectedButtonText(region).equals(eu.getText())) {
+								usSize.setText(ShoeSizeConverter.mensEuToUS(dbl));
+								ukSize.setText(ShoeSizeConverter.mensEuToUK(dbl));
+								euSize.setText(size);
+							}
+						} else if (getSelectedButtonText(gender).equals(womens.getText())) {
+							if (getSelectedButtonText(region).equals(us.getText())) {
+								usSize.setText(size);
+								ukSize.setText(ShoeSizeConverter.wommensUSToUK(dbl));
+								euSize.setText(ShoeSizeConverter.wommensUSToEu(dbl));
+							} else if (getSelectedButtonText(region).equals(uk.getText())) {
+								usSize.setText(ShoeSizeConverter.wommensUKToUS(dbl));
+								ukSize.setText(size);
+								euSize.setText(ShoeSizeConverter.wommensUKToEu(dbl));
+							} else if (getSelectedButtonText(region).equals(eu.getText())) {
+								usSize.setText(ShoeSizeConverter.wommensEuToUS(dbl));
+								ukSize.setText(ShoeSizeConverter.wommensEuToUK(dbl));
+								euSize.setText(size);
+							}
 						}
-					}else if(getSelectedButtonText(gender).equals(womens.getText())){
-						if(getSelectedButtonText(region).equals(us.getText())){
-							usSize.setText(size);
-							ukSize.setText(ShoeSizeConverter.wommensUSToUK(dbl));
-							euSize.setText(ShoeSizeConverter.wommensUSToEu(dbl));
-						}else if(getSelectedButtonText(region).equals(uk.getText())){
-							usSize.setText(ShoeSizeConverter.wommensUKToUS(dbl));
-							ukSize.setText(size);
-							euSize.setText(ShoeSizeConverter.wommensUKToEu(dbl));
-						}else if(getSelectedButtonText(region).equals(eu.getText())){
-							usSize.setText(ShoeSizeConverter.wommensEuToUS(dbl));
-							ukSize.setText(ShoeSizeConverter.wommensEuToUK(dbl));
-							euSize.setText(size);
-						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Complete all the steps.");
 					}
+				}catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Enter A Size.");
 				}
 			}
 		});
-		
+
 		help.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Steps:\n1. Enter your shoe size.\n2. Select your gender and then a sizing system.\n3. Press Convert.\n\nSUPPORTED SIZES:\n"
-						+ "US Men's: 6-11.5, 12, 13, 14, 15, 16\nUS Women's: 4-12\n"
-						+ "UK Men's: 5.5-11.5, 12.5, 13.5, 14.5, 15.5\nUK Women's: 2-10\n"
-						+ "EU Men's: 39-49\nEU Women's: 35-43");
+				JOptionPane.showMessageDialog(null,
+						"Steps:\n1. Enter your shoe size.\n2. Select your gender and then a sizing system.\n3. Press Convert.\n\nSUPPORTED SIZES:\n"
+								+ "US Men's: 6-11.5, 12, 13, 14, 15, 16\nUS Women's: 4-12\n"
+								+ "UK Men's: 5.5-11.5, 12.5, 13.5, 14.5, 15.5\nUK Women's: 2-10\n"
+								+ "EU Men's: 39-49\nEU Women's: 35-43");
 			}
 		});
-		
+
 	}
 
 }
