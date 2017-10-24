@@ -40,7 +40,7 @@ public class ShoeConverter {
 	final JPanel regionPanel = new JPanel();
 	final JPanel sizePanel = new JPanel();
 	final String title = "CYS SHOE CONVERTER";
-	final String info = "CYS Shoe Converter\nVersion 2.2.0 (\u03B1 Build)\nDeveloped for Clean Your Shoes and CYS Tech by Jordan C. McRae";
+	final String info = "CYS Shoe Converter\nVersion 2.2.1 (\u03B1 Build)\nDeveloped for Clean Your Shoes and CYS Tech by Jordan C. McRae";
 	final JLabel label = new JLabel(title);
 	final JLabel hint = new JLabel("ENTER SIZE");
 	final JLabel usLabel = new JLabel("US:");
